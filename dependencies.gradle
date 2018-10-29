@@ -1,0 +1,70 @@
+allprojects {
+    repositories {
+        jcenter()
+        google()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        mavenCentral()
+    }
+}
+
+ext {
+
+    //Android libraries
+    supportLibraryVersion = '28.0.0-alpha3'
+    constraintLayoutVersion = '1.1.2'
+    archComponentsVersion = '1.1.1'
+    googlePlayServicesVersion = "11.8.0"
+    coroutinesVersion = "0.26.1"
+
+    okhttpLoggingInterceptorVersion = "3.11.0"
+    retrofitVersion = "2.4.0"
+    butterKnifeVersion = "8.8.1"
+    glideVersion = "4.6.1"
+    glideTransformationsVersion = "3.1.1"
+
+    koinVersion = "1.0.0"
+
+    //Unit Testing
+    jUnitVersion = "4.12"
+    assertJVersion = "3.8.0"
+    mockitoCoreVersion = "2.18.3"
+    mockitoInlineVersion = "2.13.0"
+    mockitoKotlinVersion = "1.5.0"
+    kluentVersion = "1.14"
+    assertKVersion = "0.10"
+    mockKVersion = "1.8.7"
+
+    mainApplication = [
+            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            koin                    : "org.koin:koin-android:$koinVersion",
+            koinViewModel           : "org.koin:koin-android-viewmodel:$koinVersion",
+            appCompat               : "com.android.support:appcompat-v7:$supportLibraryVersion",
+            recyclerView            : "com.android.support:recyclerview-v7:$supportLibraryVersion",
+            design: "com.android.support:design:$supportLibraryVersion",
+            constraintLayout        : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
+            archComponents          : "android.arch.lifecycle:common-java8:$archComponentsVersion",
+            archComponentsExtensions: "android.arch.lifecycle:extensions:$archComponentsVersion",
+            archComponentsCompiler  : "android.arch.lifecycle:compiler:$archComponentsVersion",
+            okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion",
+            retrofit                : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            glide                   : "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler           : "com.github.bumptech.glide:compiler:$glideVersion",
+            glideRecyclerView       : "com.github.bumptech.glide:recyclerview-integration:$glideVersion",
+            coroutines              : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+    ]
+
+    unitTesting = [
+            jUnit         : "junit:junit:$jUnitVersion",
+            assertJ       : "org.assertj:assertj-core:$assertJVersion",
+            mockitoCore   : "org.mockito:mockito-core:$mockitoCoreVersion",
+            mockitoInline : "org.mockito:mockito-inline:$mockitoInlineVersion",
+            mockitoKotlin : "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion",
+            kluent        : "org.amshove.kluent:kluent:$kluentVersion",
+            archComponents: "android.arch.core:core-testing:$archComponentsVersion",
+            assertK       : "com.willowtreeapps.assertk:assertk:$assertKVersion",
+            mockK         : "io.mockk:mockk:$mockKVersion"
+    ]
+
+}

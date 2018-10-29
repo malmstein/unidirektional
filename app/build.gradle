@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    def config = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion config["compile_sdk"]
+
+    defaultConfig {
+        applicationId config["application_id"]
+        minSdkVersion config["min_sdk"]
+        targetSdkVersion config["target_sdk"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        xmlReport true
+        abortOnError false
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+    
+}
+
+dependencies {
+
+    def applicationDependencies = rootProject.ext.mainApplication
+    def unitTestDependencies = rootProject.ext.unitTesting
+
+    // Compile time dependencies
+    kapt applicationDependencies.archComponentsCompiler
+    kapt applicationDependencies.glideCompiler
+
+    implementation project(':core')
+    
+    //Application dependencies
+    implementation applicationDependencies.kotlin
+    implementation applicationDependencies.koinViewModel
+    implementation applicationDependencies.appCompat
+    implementation applicationDependencies.recyclerView
+    implementation applicationDependencies.design
+    implementation applicationDependencies.constraintLayout
+    implementation applicationDependencies.archComponents
+    implementation applicationDependencies.archComponentsExtensions
+    implementation applicationDependencies.okhttpLoggingInterceptor
+    implementation applicationDependencies.retrofit
+    implementation applicationDependencies.retrofitGsonConverter
+    implementation applicationDependencies.glide
+    implementation applicationDependencies.glideRecyclerView
+    implementation applicationDependencies.coroutines
+    implementation applicationDependencies.coroutinesAndroid
+
+    //Unit/Integration tests dependencies
+    testImplementation project(':core')
+    testImplementation unitTestDependencies.jUnit
+    testImplementation unitTestDependencies.assertJ
+    testImplementation unitTestDependencies.mockitoCore
+    testImplementation unitTestDependencies.mockitoInline
+    testImplementation unitTestDependencies.mockitoKotlin
+    testImplementation unitTestDependencies.kluent
+    testImplementation unitTestDependencies.archComponents
+    testImplementation unitTestDependencies.assertK
+    testImplementation unitTestDependencies.mockK
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
