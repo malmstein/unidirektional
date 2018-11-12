@@ -4,11 +4,10 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.MainThread
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.Main
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlin.coroutines.CoroutineContext
 
 class Action<T>(private val f: T.() -> T) {
     operator fun invoke(t: T) = t.f()
@@ -33,7 +32,7 @@ class ViewStateStore<T : Any>(initialState: T) : CoroutineScope {
     }
 
     fun dispatchAction(f: suspend (T) -> Action<T>) {
-        launch {
+        GlobalScope.launch {
             val action = f(state())
             withContext(Dispatchers.Main) {
                 dispatchState(action(state()))

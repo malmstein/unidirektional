@@ -8,8 +8,9 @@ import com.malmstein.samples.unidirektional.feature.Photo
 import com.malmstein.samples.unidirektional.feature.PhotosRepository
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import java.io.IOException
 
@@ -42,7 +43,7 @@ class GetPhotosTest : MainUseCaseTest() {
 
     @Test
     fun `changes state on error`() {
-        coEvery { repository.all() } returns async { throw IOException() }
+        coEvery { repository.all() } returns GlobalScope.async { throw IOException() }
 
         val states = runBlocking {
             useCase.invoke().states(GalleryViewState())

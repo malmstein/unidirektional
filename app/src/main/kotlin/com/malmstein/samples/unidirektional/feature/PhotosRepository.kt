@@ -2,9 +2,11 @@ package com.malmstein.samples.unidirektional.feature
 
 import com.malmstein.samples.unidirektional.data.Repository
 import com.malmstein.samples.unidirektional.infrastructure.network.NetworkHandler
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.coroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+
 
 data class Photo(val imageUrl: String)
 
@@ -17,7 +19,7 @@ class PhotosRepositoryImpl(
     private val api: PhotosService
 ) : PhotosRepository {
     override suspend fun all(): Deferred<List<Photo>> = coroutineScope {
-        async {
+        GlobalScope.async {
             when (networkHandler.isConnected) {
                 true -> loadPhotos()
                 false, null -> loadFallback()

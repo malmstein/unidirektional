@@ -3,10 +3,10 @@ package com.malmstein.samples.unidirektional
 import com.malmstein.samples.unidirektional.store.Action
 import io.mockk.ConstantAnswer
 import io.mockk.MockKStubScope
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.fold
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.fold
 import org.junit.Rule
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith

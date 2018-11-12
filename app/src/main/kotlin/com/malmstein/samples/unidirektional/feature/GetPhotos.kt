@@ -2,7 +2,7 @@ package com.malmstein.samples.unidirektional.feature
 
 import com.malmstein.samples.unidirektional.store.Action
 import com.malmstein.samples.unidirektional.store.MainUseCase
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.channels.ReceiveChannel
 
 class GetPhotos(private val repository: PhotosRepository): MainUseCase() {
 
