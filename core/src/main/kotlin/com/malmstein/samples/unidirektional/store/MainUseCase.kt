@@ -7,8 +7,9 @@ import kotlinx.coroutines.channels.produce
 
 open class MainUseCase {
 
-    suspend fun <T> ProducerScope<Action<T>>.send(f: T.() -> T) = send(Action(f))
+    suspend fun <T> ProducerScope<State<T>>.send(f: T.() -> T) = send(State(f))
 
-    fun <T> produceActions(f: suspend ProducerScope<Action<T>>.() -> Unit): ReceiveChannel<Action<T>> = GlobalScope.produce(block = f)
+    fun <T> produceActions(f: suspend ProducerScope<State<T>>.() -> Unit): ReceiveChannel<State<T>> =
+        GlobalScope.produce(block = f)
 
 }

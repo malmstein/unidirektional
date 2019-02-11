@@ -1,10 +1,10 @@
 package com.malmstein.samples.unidirektional.feature
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.malmstein.samples.unidirektional.extensions.isVisible
 import kotlinx.android.synthetic.main.activity_gallery.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GalleryActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        galleryViewModel.store.observe(this) {
+        galleryViewModel.store.observeState(this) {
             gallery_loading.isVisible = it.loading
         }
         galleryViewModel.loadGallery()

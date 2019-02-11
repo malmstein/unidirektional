@@ -10,21 +10,23 @@ allprojects {
 ext {
 
     //Android libraries
+    materialVersion = '1.1.0-alpha01'
     supportLibraryVersion = '28.0.0-alpha3'
-    constraintLayoutVersion = '1.1.2'
-    archComponentsVersion = '1.1.1'
-    googlePlayServicesVersion = "11.8.0"
+    constraintLayoutVersion = '2.0.0-alpha3'
+    archComponentsVersion = '2.1.0-alpha01'
     coroutinesVersion = "1.0.0"
 
+    //Third party libraries
     okhttpLoggingInterceptorVersion = "3.11.0"
     retrofitVersion = "2.4.0"
-    butterKnifeVersion = "8.8.1"
     glideVersion = "4.6.1"
     glideTransformationsVersion = "3.1.1"
 
-    koinVersion = "1.0.0"
+    //Dependency injection
+    koinVersion = "1.0.2"
 
     //Unit Testing
+    androidXTesting = '2.0.0'
     jUnitVersion = "4.12"
     assertJVersion = "3.8.0"
     mockitoCoreVersion = "2.18.3"
@@ -37,14 +39,14 @@ ext {
     mainApplication = [
             kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
             koin                    : "org.koin:koin-android:$koinVersion",
-            koinViewModel           : "org.koin:koin-android-viewmodel:$koinVersion",
-            appCompat               : "com.android.support:appcompat-v7:$supportLibraryVersion",
-            recyclerView            : "com.android.support:recyclerview-v7:$supportLibraryVersion",
-            design: "com.android.support:design:$supportLibraryVersion",
-            constraintLayout        : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
-            archComponents          : "android.arch.lifecycle:common-java8:$archComponentsVersion",
-            archComponentsExtensions: "android.arch.lifecycle:extensions:$archComponentsVersion",
-            archComponentsCompiler  : "android.arch.lifecycle:compiler:$archComponentsVersion",
+            koinViewModel           : "org.koin:koin-androidx-viewmodel:$koinVersion",
+            appCompat               : "androidx.appcompat:appcompat:$materialVersion",
+            recyclerView            : "androidx.recyclerview:recyclerview:$materialVersion",
+            materialDesign          : "com.google.android.material:material:$materialVersion",
+            constraintLayout        : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            archComponents          : "androidx.lifecycle:lifecycle-common-java8:$archComponentsVersion",
+            archComponentsExtensions: "androidx.lifecycle:lifecycle-extensions:$archComponentsVersion",
+            archComponentsCompiler  : "androidx.lifecycle:lifecycle-compiler:$archComponentsVersion",
             okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion",
             retrofit                : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
@@ -62,7 +64,7 @@ ext {
             mockitoInline : "org.mockito:mockito-inline:$mockitoInlineVersion",
             mockitoKotlin : "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion",
             kluent        : "org.amshove.kluent:kluent:$kluentVersion",
-            archComponents: "android.arch.core:core-testing:$archComponentsVersion",
+            archComponents: "androidx.arch.core:core-testing:$androidXTesting",
             assertK       : "com.willowtreeapps.assertk:assertk:$assertKVersion",
             mockK         : "io.mockk:mockk:$mockKVersion"
     ]

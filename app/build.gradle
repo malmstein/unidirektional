@@ -50,7 +50,7 @@ dependencies {
     implementation applicationDependencies.koinViewModel
     implementation applicationDependencies.appCompat
     implementation applicationDependencies.recyclerView
-    implementation applicationDependencies.design
+    implementation applicationDependencies.materialDesign
     implementation applicationDependencies.constraintLayout
     implementation applicationDependencies.archComponents
     implementation applicationDependencies.archComponentsExtensions
