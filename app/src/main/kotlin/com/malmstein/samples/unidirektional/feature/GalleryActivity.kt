@@ -2,8 +2,9 @@ package com.malmstein.samples.unidirektional.feature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.malmstein.samples.unidirektional.extensions.isVisible
-import kotlinx.android.synthetic.main.activity_gallery.*
+import com.malmstein.samples.unidirektional.functional.Either
+import com.malmstein.samples.unidirektional.models.Failure
+import com.malmstein.samples.unidirektional.models.ViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GalleryActivity : AppCompatActivity() {
@@ -19,9 +20,21 @@ class GalleryActivity : AppCompatActivity() {
 
     private fun initViewModel() {
         galleryViewModel.store.observeState(this) {
-            gallery_loading.isVisible = it.loading
+            when (it) {
+                is Either.Left -> renderSuccess(it.a)
+                is Either.Right -> renderFailure(it.b)
+            }
         }
         galleryViewModel.loadGallery()
     }
+
+    private fun renderSuccess(state: ViewState) {
+
+    }
+
+    private fun renderFailure(failure: Failure) {
+
+    }
+
 
 }

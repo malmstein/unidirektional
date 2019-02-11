@@ -1,38 +1,39 @@
 package com.malmstein.samples.unidirektional.store
 
+import android.view.View
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.malmstein.samples.unidirektional.functional.Either
+import com.malmstein.samples.unidirektional.models.Failure
+import com.malmstein.samples.unidirektional.models.ViewState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlin.coroutines.CoroutineContext
 
-
 class State<T>(private val f: T.() -> T) {
     operator fun invoke(t: T) = t.f()
 }
 
-class ViewStateStore<T : Any>(initialState: T) : CoroutineScope {
+class ViewStateStore(initialState: Either<ViewState, Failure> = Either.Left(ViewState.Idle)) : CoroutineScope {
 
     private val job = Job()
 
-    private val stateLiveData = MutableLiveData<T>().apply {
-        value = initialState
-    }
+    private val stateLiveData = MutableLiveData<Either<ViewState, Failure>>()
 
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
-    fun observeState(owner: LifecycleOwner, observer: (T) -> Unit) =
+    fun observeState(owner: LifecycleOwner, observer: (Either<ViewState, Failure>) -> Unit) =
         stateLiveData.observe(owner, Observer { observer(it!!) })
 
     @MainThread
-    fun dispatchState(state: T) {
+    fun dispatchState(state: Either<ViewState, Failure>) {
         stateLiveData.value = state
     }
 
-    fun dispatchState(f: suspend (T) -> State<T>) {
+    fun dispatchState(f: suspend (Either<ViewState, Failure>) -> State<Either<ViewState, Failure>>) {
         GlobalScope.launch {
             val action = f(state())
             withContext(Dispatchers.Main) {
@@ -41,7 +42,7 @@ class ViewStateStore<T : Any>(initialState: T) : CoroutineScope {
         }
     }
 
-    fun dispatchStates(channel: ReceiveChannel<State<T>>) {
+    fun dispatchStates(channel: ReceiveChannel<State<Either<ViewState, Failure>>>) {
         launch {
             channel.consumeEach { action ->
                 withContext(Dispatchers.Main) {

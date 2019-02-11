@@ -1,4 +1,4 @@
-package com.malmstein.samples.unidirektional.store
+package com.malmstein.samples.unidirektional.models
 
 sealed class ViewEvent {
     data class Message(val message: String) : ViewEvent()
