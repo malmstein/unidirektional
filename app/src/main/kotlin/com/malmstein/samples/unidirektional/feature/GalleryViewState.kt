@@ -1,12 +1,7 @@
 package com.malmstein.samples.unidirektional.feature
 
 import com.malmstein.samples.unidirektional.models.Failure
-import com.malmstein.samples.unidirektional.models.ViewState
+import com.malmstein.samples.unidirektional.models.Success
 
-data class GalleryViewState(
-        val photos: List<Photo> = emptyList(),
-        val loading: Boolean = false,
-        val error: Throwable? = null
-) : ViewState.Photos()
-
-data class GalleryFailure(val e: Exception): Failure.FeatureFailure()
+data class GalleryViewState(val photos: List<Photo> = emptyList()) : Success.FeatureSuccess()
+data class GalleryFailure(val e: Exception) : Failure.FeatureFailure()

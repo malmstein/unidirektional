@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.malmstein.samples.unidirektional.functional.Either
 import com.malmstein.samples.unidirektional.models.Failure
-import com.malmstein.samples.unidirektional.models.ViewState
+import com.malmstein.samples.unidirektional.models.Success
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GalleryActivity : AppCompatActivity() {
 
-    val galleryViewModel: GalleryViewModel by viewModel()
+    private val galleryViewModel: GalleryViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class GalleryActivity : AppCompatActivity() {
         galleryViewModel.loadGallery()
     }
 
-    private fun renderSuccess(state: ViewState) {
+    private fun renderSuccess(success: Success) {
 
     }
 

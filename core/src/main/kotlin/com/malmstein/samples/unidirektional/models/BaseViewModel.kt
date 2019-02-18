@@ -6,9 +6,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.malmstein.samples.unidirektional.models.ViewEvent
+import com.malmstein.samples.unidirektional.store.ViewStateStore
 
 open class BaseViewModel: ViewModel() {
+
+    val store: ViewStateStore = ViewStateStore()
 
     @VisibleForTesting
     val eventLiveData = MutableLiveData<ViewEvent>()
