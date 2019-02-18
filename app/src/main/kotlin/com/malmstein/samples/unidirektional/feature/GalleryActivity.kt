@@ -15,7 +15,6 @@ class GalleryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initViewModel()
-
     }
 
     private fun initViewModel() {

@@ -20,7 +20,7 @@ class ViewStateStore(initialState: Either<Success, Failure> = Either.Left(Succes
 
     private val job = Job()
 
-    private val stateLiveData = MutableLiveData<Either<Success, Failure>>()
+    private val stateLiveData = MutableLiveData<Either<Success, Failure>>().apply { value = initialState }
 
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
@@ -51,7 +51,7 @@ class ViewStateStore(initialState: Either<Success, Failure> = Either.Left(Succes
         }
     }
 
-    fun state() = stateLiveData.value!!
+    private fun state() = stateLiveData.value!!
 
     fun cancel() = job.cancel()
 
