@@ -29,8 +29,20 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun renderSuccess(success: Success) {
+        when (success) {
+            is Success.ViewEvent -> reactToEvent(success)
+            is Success.ViewState -> renderViewState(success)
+        }
+    }
+
+    private fun reactToEvent(event: Success.ViewEvent) {
 
     }
+
+    private fun renderViewState(viewState: Success.ViewState) {
+
+    }
+
 
     private fun renderFailure(failure: Failure) {
 

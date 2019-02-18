@@ -5,9 +5,20 @@ package com.malmstein.samples.unidirektional.models
  * Every feature specific success should extend [FeatureSuccess] class.
  */
 sealed class Success {
-    object Idle : Success()
-    object Loading : Success()
 
     /** * Extend this class for feature specific success.*/
-    abstract class FeatureSuccess : Success()
+    abstract class ViewState : Success()
+
+    abstract class ViewEvent : Success()
+
+    // App wide success view states
+    object Idle : ViewState()
+
+    object Loading : ViewState()
+
+    // App wide success view events
+    data class Message(val message: String) : ViewEvent()
+
+    object Close : ViewEvent()
+
 }
